@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex UI</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+
+</head>
+<body>
+    <input type="button" value="Render" id="btnRender">
+    <div id="root"></div>
+
+    <script>
+        var counter = 0;
+        function onBtnRenderClick(){
+            var appEle = React.createElement('div', null, 
+                React.createElement('h1', null, 'React.js!'),
+                React.createElement('hr'),
+                React.createElement('div', null, 
+                    React.createElement('span', null, 'Counter : '),
+                    React.createElement('span', null, ++counter)
+                ),
+                React.createElement('section', null, 
+                    React.createElement('h3', null, 'Introduction'),
+                    React.createElement('p', null, 'Voluptate proident laborum sint laboris ullamco tempor qui excepteur. Incididunt nisi proident do anim deserunt pariatur laboris occaecat sunt commodo amet. Est reprehenderit id excepteur labore magna aliquip esse est elit. Laborum proident aliqua Lorem anim duis. Incididunt nostrud dolor fugiat irure consectetur sint velit sint ea do exercitation amet. Cupidatat exercitation aliqua est non anim aliqua consectetur in culpa voluptate.'),
+                    React.createElement('p', null, 'Laborum ullamco consectetur culpa Lorem adipisicing eiusmod laborum laborum dolor excepteur dolore quis sint sint. Esse sint aliqua mollit exercitation tempor ad. Nisi adipisicing proident ullamco sunt esse commodo reprehenderit. Qui aliquip non pariatur tempor cillum culpa elit quis cillum eu officia. Nulla aute laborum sunt cillum labore amet deserunt cillum cillum ullamco incididunt nostrud exercitation. Exercitation ad reprehenderit consequat sint laborum consectetur magna commodo irure dolore do velit velit magna. Dolore nulla reprehenderit in esse magna.'),
+                    React.createElement('p', null, 'Sint proident officia nulla adipisicing eiusmod cupidatat labore cupidatat exercitation. Reprehenderit non laborum culpa sit veniam excepteur reprehenderit id laborum cillum veniam velit. Laborum id tempor nulla Lorem in dolor nostrud aute amet fugiat voluptate. Amet in quis sunt quis do commodo. Anim commodo veniam elit anim velit. Adipisicing cupidatat voluptate consequat quis.'),
+                ),
+                React.createElement('section', null,
+                    React.createElement('h3', null, 'Advantages'),
+                    React.createElement('ol', null, 
+                        React.createElement('li', null, 'Efficient'),
+                        React.createElement('li', null, 'Declarative'),
+                    ) 
+                )
+            );
+
+            ReactDOM.render(appEle, document.getElementById('root'));
+        }
+        document
+            .getElementById('btnRender')
+            .addEventListener('click', onBtnRenderClick);
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeter</title>
+    <script src="jquery-3.5.1.js"></script>
+</head>
+<body>
+    <h1>Greeter</h1>
+    <hr>
+    <label for="">User Name :</label>
+    <input type="text" name="" id="txtUserName">
+    <input type="button" value="Greet" id="btnGreet">
+    <div id="divMessage">[message]</div>
+    <script>
+        function displayMessage() {
+            var message = 'Hi ' + $('#txtUserName').val() + ', Have a nice day!'
+            $('#divMessage').text(message);
+        }
+        $('#btnGreet').click(displayMessage);
+    </script>
+</body>
+</html>

@@ -29,3 +29,13 @@ React.js
 4:00 - 11:30PM After Lunch
 6:00 - 1:30AM Tea
 8:00 - 3:30AM Wind up
+
+VS Code extensions
+=====================
+Auto Rename Tag
+Bracket Pair Colorizer
+Clang-Format
+Lorem ipsum
+Material Icon Theme
+Prettier - Code formatter
+Tabnine Autocomplete AI

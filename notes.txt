@@ -1,0 +1,31 @@
+React.js & Redux
+
+Your Name
+Primary Skillset
+Rank yourself in JavaScript (1-10)
+Exposure to any JavaScript frameworks (Backbone, Angular, Vue.js)
+Exposure to React
+
+Mainframe(1, 1, 1, 1)
+Business Analyst(1)
+DBA(1)
+Core Java (1, 1, 1, 1, 1, 1, 1, 1, 1)
+C# (1)
+Angular (1, 1, 1)
+React(1)
+React Native(1)
+Node(1, 1, 1, 1)
+Ember(1)
+J2EE(1, 1)
+Test Automation(1, 1, 1)
+
+
+React.js
+    Rich Internet Applications
+
+0:00 - 7:30PM
+1:30 - 9:00PM Tea
+3:00 - 10:30PM Lunch
+4:00 - 11:30PM After Lunch
+6:00 - 1:30AM Tea
+8:00 - 3:30AM Wind up

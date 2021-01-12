@@ -175,3 +175,22 @@ For More -> http://es6-features.org
 
 Assignment (Day-2)
     Array methods : filter, forEach, map, reduce
+
+
+Create React Application
+    using create-react-app (node cli)
+
+React Component = encapsulatation of Presentation + UI Behavior + State
+    Presentation = HTML
+    UI Behavior = handling user actions
+    State = data
+
+HTML
+open tags are allowed
+'for' attribute is allowed
+'class' attribute is allowed
+
+JSX
+all tags must have corresponding close tags
+use 'htmlFor' instead (of 'for')
+use 'className' instead (of 'class')

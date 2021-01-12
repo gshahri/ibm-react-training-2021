@@ -194,3 +194,15 @@ JSX
 all tags must have corresponding close tags
 use 'htmlFor' instead (of 'for')
 use 'className' instead (of 'class')
+
+
+To create a react application
+    From the folder where we want to the app
+        npx create-react-app <app-name>
+            OR
+        npm install create-react-app  -g
+        create-react-app <app-name>
+
+To install yarn
+    npm install yarn  -g
+    

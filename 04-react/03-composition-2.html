@@ -86,12 +86,12 @@
                         <SalaryCalculatorInput labelText="Basic :" onValueChange={ value => model.set('basic', value) }/>
                         <SalaryCalculatorInput labelText="HRA :" onValueChange={ value => model.set('hra', value) } />
                         <SalaryCalculatorInput labelText="DA :" onValueChange={ value => model.set('da', value) } />
-                        <div className="field">
-                            <label htmlFor="">Tax :</label>
-                            <input type="range" id="rangeTax" min="0" max="30" 
-                                defaultValue="0"
-                                 onChange={evt => model.set('tax', parseInt(evt.target.value))}/>
-                        </div>
+                        <SalaryCalculatorInput 
+                            labelText="Tax :" 
+                            onValueChange={value => model.set('tax', value)} 
+                            type="range"
+                            min="0" max="30" defaultValue="0"
+                        />
                         <div className="field">
                             <input type="button" value="Calculate" id="btnCalculate" onClick={ _ => model.calculate() } />
                         </div>
@@ -103,11 +103,15 @@
 
         class SalaryCalculatorInput extends React.Component{
             render(){
-                const { onValueChange, labelText } = this.props; //callback
+                const { onValueChange, labelText, type="number", ...restProps } = this.props; //callback
                 return(
                     <div className="field">
                         <label htmlFor="">{labelText}</label>
-                        <input type="number" onChange={ evt => onValueChange(parseInt(evt.target.value))} />
+                        <input 
+                            type={type} 
+                            onChange={ evt => onValueChange(parseInt(evt.target.value))} 
+                            {...restProps}
+                        />
                     </div>
                 )
             }

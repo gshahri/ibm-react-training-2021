@@ -39,3 +39,139 @@ Lorem ipsum
 Material Icon Theme
 Prettier - Code formatter
 Tabnine Autocomplete AI
+
+
+ES6 (ECMAScript 6 / ESNext / ES2015)
+1. let
+2. const
+3. Array destructuring
+        var nos = [3,1,5,2,4]
+        var [x, y] = nos
+        [x,y] = [y,x]
+
+4. Rest operator (Array)
+        var [x, y, ...z] = nos;
+        function add(...nos){
+            let result = 0;
+            for(let i = 0, count = nos.length; i < count; i++)
+                result += nos[i]
+            return result;
+        }
+
+5. Spread operator (Array)
+        var newNos = [ ...nos, 10,20,30]
+
+6. Object destructuring
+        var emp = { id : 100, name : 'Magesh', salary : 10000 }
+        //var { id, salary } = emp
+        var { salary, id } = emp
+        var { id : x, salary : y } = emp
+
+        var emps = [
+            { id : 100, name : 'Magesh', salary : 10000 },
+            { id : 101, name : 'Philip', salary : 20000 }
+        ]
+        //combining object and array destructuring
+        var [ { id : x1, salary : y1 }, { id : x2, salary : y2 } ] = emps
+
+7. Rest operator (Object)
+        var emp = { id : 100, name : 'Magesh', salary : 10000 }
+        var { id : x, ...z } = emp
+
+8. Spread operator (Object)
+        var emp = { id : 100, name : 'Magesh', salary : 10000 }
+        var newEmp = { ...emp, city : 'Bangalore' }
+
+9. Object constructor enhancements
+        var id = 100, name = 'Magesh', salary = 10000
+        var emp = {id, name, salary}
+
+10. default arguments
+        function add(x = 10,y = 20){
+            return x + y;
+        }
+        add()
+        30
+        add(100)
+        120
+        add(undefined, 200)
+        210
+        add(100,200)
+        300
+
+11. Arrow functions
+        /*
+        //function statement
+        function add(x,y){
+        return x + y;
+        }
+
+        //function expression
+        var add = function(x,y){
+        return x + y;
+        }
+
+        var add = (x,y) => {
+        return x + y;
+        }
+        */
+        var add = (x,y) => x + y;
+
+        var nos = [3,1,5,2,4]
+        
+        var evenNos = nos.filter(function(no){
+            return no % 2 === 0;
+        })
+        nos.filter(no => no % 2 === 0)
+
+12. Class
+
+    class Employee{
+        id = 0;
+        name = '';
+        salary = 0;
+        
+        constructor(id, name, salary){
+            this.id = id;
+            this.name = name;
+            this.salary = salary;
+        }
+
+        display(){
+            console.log(this.id, this.name, this.salary);
+        }
+    }
+
+    //Class Inheritance
+    class FulltimeEmployee extends Employee{
+        benefits = '';
+        constructor(id, name, salary, benefits){
+            super(id, name, salary);
+            this.benefits= benefits;
+        }
+    }
+
+13. template strings
+    var x = 10, y = 20
+    var s1 = 'Sum of ' + x + ' and ' + y + ' is ' + (x + y)
+
+    var s2 = `Sum of ${x} and ${y} is ${x+y}`
+    
+    var s2 = `Sum of ${x} 
+    and ${y} is ${x+y}`
+
+14. iterators
+    var nos = [3,1,5,2,4]
+    
+    for(let no of nos)
+        console.log(no)
+
+
+15. generators
+16. promises
+17. async await
+
+For More -> http://es6-features.org
+
+Assignment (Day-2)
+    Array methods : filter, forEach, map, reduce

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <style>
+        body {
+            margin: 50px
+        }
+    
+        .field {
+            margin-bottom: 10px;
+            ;
+        }
+    
+        label {
+            display: block;
+        }
+    
+        td {
+            font-size: 18pt;
+            padding-right: 10px;
+        }
+        .goodSalary{
+            color : green
+        }
+        .poorSalary {
+            color : red
+        }
+    </style>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script type="text/babel">
+        function SalaryCalculatorModel() {
+                var _data = {
+                    basic: 0,
+                    hra: 0,
+                    da: 0,
+                    tax: 0,
+                    salary: 0
+                };
+
+                var _callbacks = [];
+
+                this.get = function (attrName) {
+                    return _data[attrName];
+                };
+
+                this.set = function (attrName, value) {
+                    if (_data[attrName] === value) return;
+                    _data[attrName] = value;
+                    _callbacks.forEach(function (callback) {
+                        if (typeof callback === 'function')
+                            callback();
+                    });
+                };
+
+                this.subscribe = function (callbackFn) {
+                    _callbacks.push(callbackFn);
+                };
+            }
+            //behavior (method)
+            SalaryCalculatorModel.prototype.calculate = function () {
+                var gross = this.get('basic') + this.get('hra') + this.get('da'),
+                    net = gross * ((100 - this.get('tax')) / 100);
+                this.set('salary', net);
+            }
+
+        const SalaryCalculator = ({ model }) => {
+            const data = {
+                    basic : model.get('basic'),
+                    hra: model.get('hra'),
+                    da: model.get('da'),
+                    tax: model.get('tax'),
+                    salary: model.get('salary'),
+                } 
+            return(
+                <section>
+                    <SalaryCalculatorInput labelText="Basic :" onValueChange={ value => model.set('basic', value) }/>
+                    <SalaryCalculatorInput labelText="HRA :" onValueChange={ value => model.set('hra', value) } />
+                    <SalaryCalculatorInput labelText="DA :" onValueChange={ value => model.set('da', value) } />
+                    <SalaryCalculatorInput 
+                        labelText="Tax :" 
+                        onValueChange={value => model.set('tax', value)} 
+                        type="range"
+                        min="0" max="30" defaultValue="0"
+                    />
+                    <div className="field">
+                        <input type="button" value="Calculate" id="btnCalculate" onClick={ _ => model.calculate() } />
+                    </div>
+                    <SalaryCalculatorResult data={data}/>
+                </section>
+            )
+        };
+        
+
+        /* function SalaryCalculatorInput(props) {
+            const { onValueChange, labelText, type = "number", ...restProps } = props;
+            return (
+                <div className="field">
+                    <label htmlFor="">{labelText}</label>
+                    <input
+                        type={type}
+                        onChange={evt => onValueChange(parseInt(evt.target.value))}
+                        {...restProps}
+                    />
+                </div>
+            )
+        } */
+
+        /* 
+        function SalaryCalculatorInput({ onValueChange, labelText, type = "number", ...restProps }) {
+            return (
+                <div className="field">
+                    <label htmlFor="">{labelText}</label>
+                    <input
+                        type={type}
+                        onChange={evt => onValueChange(parseInt(evt.target.value))}
+                        {...restProps}
+                    />
+                </div>
+            )
+        } 
+        */
+
+        const SalaryCalculatorInput = ({ onValueChange, labelText, type = "number", ...restProps }) => (
+            <div className="field">
+                <label htmlFor="">{labelText}</label>
+                <input
+                    type={type}
+                    onChange={evt => onValueChange(parseInt(evt.target.value))}
+                    {...restProps}
+                />
+            </div>
+        );
+        
+
+        const SalaryCalculatorResult = ({ data }) => {
+            const salaryClass = data.salary < 10000 ? 'poorSalary' : 'goodSalary';
+            const salaryEle = (<td id="tdSalary" className={salaryClass}>{data.salary}</td>);
+            return(
+                <div className="field">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td id="tdBasic">{data.basic}</td>
+                                <td id="tdHra">{data.hra}</td>
+                                <td id="tdDa">{data.da}</td>
+                                <td id="tdTax">{data.tax}</td>
+                                { data.salary === 0 ? null : salaryEle }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            )
+        };
+        
+
+        const model = new SalaryCalculatorModel();
+        function renderCalculator(){
+            ReactDOM.render(
+                <SalaryCalculator model={model}/>,
+                document.getElementById('root')
+            )
+        }
+        renderCalculator();
+        model.subscribe(renderCalculator)
+    </script>
+</head>
+<body>
+    <h1>Salary Calculator</h1>
+    <hr>
+    <div id="root">
+
+    </div>
+</body>
+</html>

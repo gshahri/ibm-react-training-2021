@@ -30,6 +30,7 @@
 
             onBtnGreetClick = () => {
                 const { userName } = this.state;
+                //const userName = this.state.userName;
                 const { greetTemplate } = this.props;
                 this.setState({ message : `Hi ${userName}, ${greetTemplate}`});
             };

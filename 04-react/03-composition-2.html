@@ -83,18 +83,9 @@
                     } 
                 return(
                     <section>
-                        <div className="field">
-                            <label htmlFor="">Basic :</label>
-                            <input type="number" id="txtBasic" onChange={this.onTxtBasicChange}/>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="">HRA :</label>
-                            <input type="number" id="txtHra" onChange={ evt => model.set('hra', parseInt(evt.target.value)) }/>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="">DA :</label>
-                            <input type="number" id="txtDa" onChange={evt => model.set('da', parseInt(evt.target.value))}/>
-                        </div>
+                        <SalaryCalculatorInput labelText="Basic :" onValueChange={ value => model.set('basic', value) }/>
+                        <SalaryCalculatorInput labelText="HRA :" onValueChange={ value => model.set('hra', value) } />
+                        <SalaryCalculatorInput labelText="DA :" onValueChange={ value => model.set('da', value) } />
                         <div className="field">
                             <label htmlFor="">Tax :</label>
                             <input type="range" id="rangeTax" min="0" max="30" 
@@ -106,6 +97,18 @@
                         </div>
                         <SalaryCalculatorResult data={data}/>
                     </section>
+                )
+            }
+        }
+
+        class SalaryCalculatorInput extends React.Component{
+            render(){
+                const { onValueChange, labelText } = this.props; //callback
+                return(
+                    <div className="field">
+                        <label htmlFor="">{labelText}</label>
+                        <input type="number" onChange={ evt => onValueChange(parseInt(evt.target.value))} />
+                    </div>
                 )
             }
         }

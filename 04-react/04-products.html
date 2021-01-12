@@ -15,13 +15,23 @@
     <script src="babel.min.js"></script>
     <script type="text/babel">
          class Products extends React.Component {
+             state = {
+                products : [
+                     'Pen',
+                     'Pencil',
+                     'Marker',
+                     'Scribble Pad'
+                 ],
+                newProductName : ''
+             };
+
+             onAddNewClick = () => {
+                 const { newProductName, products } = this.state;
+                 this.setState({ products : [...products, newProductName ]});
+             }
+
             render(){
-                const products = [
-                    'Pen',
-                    'Pencil',
-                    'Marker',
-                    'Scribble Pad'
-                ];
+                
                 /* 
                 const productItems = [];
                 for(let index = 0, count = products.length; index < count; index++){
@@ -30,14 +40,20 @@
                     productItems.push(productItem);
                 } 
                 */
-                const productItems = products.map((productName, index) => (<li key={index}>{productName}</li>));
+                const { products } = this.state; 
+                const productItems = products.map((productName, index) => (
+                    <li key={index}>
+                        <span> {productName} </span>
+                        <input type="button" value="Remove" /> 
+                    </li>
+                ));
                 return(
                     <React.Fragment>
                         <h1>Products</h1>
                         <hr/>
                         <label>Product Name :</label>
-                        <input type="text" name="" id=""/>
-                        <input type="button" value="Add New"/>
+                        <input type="text" onChange={ evt => this.setState({ newProductName : evt.target.value}) }/>
+                        <input type="button" value="Add New" onClick={this.onAddNewClick} />
                         <ol>
                             {productItems}
                         </ol>       

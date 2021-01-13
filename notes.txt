@@ -234,3 +234,22 @@ Before React 16
             - useMemo
             - useCallback
             - useRef
+
+    State
+        Application State
+            Data that is used in the core application logic
+            It is highly likely that this data is needed through out the application
+            SHOULD NOT be maintained in the component state
+
+        UI State
+            Data that represents the UI logic (presentation) of the application
+            It is highly likely that this data is needed ONLY in the component
+            CAN be maintained in the component state
+
+Flux
+    Architectural guideline by Facebook for managing the application state and manipulating them
+
+
+
+Redux
+    Library - https://unpkg.com/redux@4.0.5/dist/redux.js

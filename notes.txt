@@ -211,3 +211,14 @@ ES6 Modules
     - Everything defined in a JS file is considered private
     - Public entities have to be EXPLICITLY EXPORTED
     - public entities from other JS files have to be EXPLICITLY IMPORTED to use.
+
+Before React 16
+    Functional components CANNOT manage state
+    Functional components CANNOT have life cycle events
+        componentWillmount
+        componentDidMount
+        componentShouldUpdate
+        render
+        componentWillUnmount
+
+    In React 16, the above can be achieved using 'React Hooks'

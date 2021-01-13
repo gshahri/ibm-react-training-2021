@@ -27,13 +27,16 @@
 
              onAddNewClick = () => {
                  const { newProductName, products } = this.state;
-                 this.setState({ products : [...products, newProductName ]});
+                 const updatedProducts = [...products, newProductName];
+                 this.setState({ products : updatedProducts});
+                 this.props.onListChange(updatedProducts);
              }
 
             onRemoveClick = (productName) => {
                 const { products } = this.state;
                 const updatedProducts = products.filter(p => p !== productName);
                 this.setState({ products : updatedProducts });
+                this.props.onListChange(updatedProducts);
             }
 
             render(){
@@ -65,11 +68,19 @@
                 <span>{data}</span>
             </div>
         );
+
+        const App = () => {
+            const [products, setProducts] = React.useState([]); 
+            return(
+                <div>
+                    <ProductsCount data={products.length} />
+                    <Products onListChange={list => setProducts(list)}/>
+                </div>
+            )
+        }
         ReactDOM.render(
-            <div>
-                <ProductsCount data={0} />
-                <Products/>
-            </div>, document.getElementById('root'))
+            <App/>
+            , document.getElementById('root'))
     </script>
 </head>
 <body>

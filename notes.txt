@@ -222,3 +222,15 @@ Before React 16
         componentWillUnmount
 
     In React 16, the above can be achieved using 'React Hooks'
+    React Hooks
+        - are functions
+        - function name must start with 'use'
+        - Builtin Hooks
+            - useState
+                manage state in functional components
+            - useEffects
+                manage lifecycle events in functional components
+            - useReducer
+            - useMemo
+            - useCallback
+            - useRef

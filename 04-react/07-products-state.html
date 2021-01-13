@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        #root > h1{
+            color : blue;
+        }
+
+    </style>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script type="text/babel">
+         class Products extends React.Component {
+             state = {
+                products : [
+                     'Pen',
+                     'Pencil',
+                     'Marker',
+                     'Scribble Pad'
+                 ],
+                newProductName : ''
+             };
+
+             onAddNewClick = () => {
+                 const { newProductName, products } = this.state;
+                 this.setState({ products : [...products, newProductName ]});
+             }
+
+            onRemoveClick = (productName) => {
+                const { products } = this.state;
+                const updatedProducts = products.filter(p => p !== productName);
+                this.setState({ products : updatedProducts });
+            }
+
+            render(){
+                const { products } = this.state; 
+                const productItems = products.map((productName, index) => (
+                    <li key={index}>
+                        <span> {productName} </span>
+                        <input type="button" value="Remove" onClick={ _ => this.onRemoveClick(productName)} /> 
+                    </li>
+                ));
+                return(
+                    <React.Fragment>
+                        <h1>Products</h1>
+                        <hr/>
+                        
+                        <label>Product Name :</label>
+                        <input type="text" onChange={ evt => this.setState({ newProductName : evt.target.value}) }/>
+                        <input type="button" value="Add New" onClick={this.onAddNewClick} />
+                        <ol>
+                            {productItems}
+                        </ol>       
+                    </React.Fragment>
+                )
+            }
+        }
+        const ProductsCount = ({data}) => (
+            <div>
+                <span> Products # : </span>
+                <span>{data}</span>
+            </div>
+        );
+        ReactDOM.render(
+            <div>
+                <ProductsCount data={0} />
+                <Products/>
+            </div>, document.getElementById('root'))
+    </script>
+</head>
+<body>
+    <div id="root">
+    </div>
+</body>
+</html>

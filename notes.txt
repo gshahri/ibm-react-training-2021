@@ -205,4 +205,9 @@ To create a react application
 
 To install yarn
     npm install yarn  -g
-    
+
+
+ES6 Modules
+    - Everything defined in a JS file is considered private
+    - Public entities have to be EXPLICITLY EXPORTED
+    - public entities from other JS files have to be EXPLICITLY IMPORTED to use.

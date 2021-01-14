@@ -48,8 +48,8 @@
         (done) 2. List the added bugs
         (done) 3. Remove any bug
         (done) 4. Toggle the 'closed' status of any bug
-        5. Remove 'closed' bugs
-        6. Display stats
+        (done) 5. Remove 'closed' bugs
+        (done) 6. Display stats
         7. Sort the bugs (assignment)
         8. Persist the bugs in the server
         9. Manager list of projects (Adding & Listing with server persistance) (Assignment)
@@ -70,6 +70,9 @@
             }
             if (action.type === 'BUGS_UPDATE'){
                 return currentState.map(bug => bug.id === action.payload.id ? action.payload : bug);
+            }
+            if (action.type === 'BUGS_INIT'){
+                return action.payload;
             }
             return currentState;
         }
@@ -96,10 +99,18 @@
                 const toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed };
                 const action = { type : 'BUGS_UPDATE', payload : toggledBug };
                 return action;
+            },
+            removeClosed(bugs){
+                const bugsToRetain = bugs.filter(bug => !bug.isClosed);
+                const action = { type : 'BUGS_INIT', payload : bugsToRetain};
+                return action;
             }
-        }
-        const BugTracker = ({bugs, addNew, remove, toggle}) => {
+        };
+
+
+        const BugTracker = ({bugs, addNew, remove, toggle, removeClosed}) => {
             const [newBugName, setNewBugName] = React.useState('');
+            const closedCount = bugs.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0);
             const bugItems = bugs.map(bug => (
                 <li key={bug.id}>
                     <span 
@@ -118,7 +129,7 @@
                         <h3>Bugs</h3>
                     </section>
                     <section className="stats">
-                        <span className="closed">1</span>
+                        <span className="closed">{closedCount}</span>
                         <span> / </span>
                         <span>{bugs.length}</span>
                     </section>
@@ -140,13 +151,46 @@
                         <ol>
                             {bugItems}
                         </ol>
-                        <input type="button" value="Remove Closed" />
+                        <input type="button" value="Remove Closed" onClick={ () => removeClosed(bugs)} />
                     </section>
                 </React.Fragment>
             )
         }
         
-        const store = Redux.createStore(bugsReducer);
+        /* function loggerMiddleware(store){
+            return function(next){
+                return function(action){
+                     console.group(action.type);
+                     console.group('Before -> ' + action.type)
+                     console.log('state -> ', store.getState())
+                     console.groupEnd();
+                     console.log(action);
+                     next(action);
+                     console.group('After -> ' + action.type)
+                     console.log('state -> ', store.getState())
+                     console.groupEnd();
+                     console.groupEnd();
+                 }
+             }
+        } */
+
+        const loggerMiddleware = store => next => action => {
+            console.group(action.type);
+            console.group('Before -> ' + action.type)
+            console.log('state -> ', store.getState())
+            console.groupEnd();
+            console.log(action);
+            next(action);
+            console.group('After -> ' + action.type)
+            console.log('state -> ', store.getState())
+            console.groupEnd();
+            console.groupEnd();
+        };
+        
+        const store = Redux.createStore(bugsReducer, Redux.applyMiddleware(loggerMiddleware));
+
+       
+
         const bugActionDispatchers = Redux.bindActionCreators(bugActionCreators, store.dispatch);
         function renderApp(){
             const bugs = store.getState();

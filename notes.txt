@@ -257,3 +257,14 @@ Redux
 To install redux
     npm install redux
     yarn add redux
+
+json-server (https://www.npmjs.com/package/json-server)
+    serves the data from a json file as restful endpoints
+    to run the json-server, from the foler that has the data file
+        npx json-server db.json -p 3030
+
+For server communication use axios (https://www.npmjs.com/package/axios)
+    to install, run the command in the application folder
+        yarn add axios
+            (OR)
+        npm install axios

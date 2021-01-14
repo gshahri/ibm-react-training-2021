@@ -8,12 +8,13 @@ import BugEdit from './components/bugEdit';
 import BugList from './components/bugList';
 
 //container (OR) smart component
-const BugTracker = ({bugs, addNew, remove, toggle, removeClosed}) => {
+const BugTracker = ({bugs, addNew, remove, toggle, removeClosed, load}) => {
     return(
         <Fragment>
             <section>
                 <h3>Bugs</h3>
             </section>
+            <input type="button" value="LOAD BUGS" onClick={load} />
             <BugStats bugs={bugs} />
             <BugSort/>
             <BugEdit addNew={addNew} />

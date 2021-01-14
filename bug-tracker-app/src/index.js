@@ -6,6 +6,9 @@ import store from './store';
 import reportWebVitals from './reportWebVitals';
 import BugTracker from './bug-tracker';
 
+import * as axios from 'axios';
+window['axios'] = axios;
+
 const bugActionDispatchers = bindActionCreators(bugActionCreators, store.dispatch);
 function renderApp(){
     const bugs = store.getState();

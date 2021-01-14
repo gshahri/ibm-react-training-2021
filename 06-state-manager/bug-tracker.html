@@ -44,8 +44,8 @@
     <!-- 
         Use Cases:
         ================================================
-        1. Add new bugs
-        2. List the added bugs
+        (done) 1. Add new bugs
+        (done) 2. List the added bugs
         3. Remove any bug
         4. Toggle the 'closed' status of any bug
         5. Remove 'closed' bugs
@@ -60,7 +60,38 @@
      <script src="babel.min.js"></script>
      <script src="redux.js"></script>
      <script type="text/babel">
-        const BugTracker = () => {
+        function bugsReducer(currentState = [], action){
+            if (action.type === 'BUGS_ADD_NEW'){
+                const newState = [...currentState, action.payload];
+                return newState;
+            }
+            return currentState;
+        }
+
+        //TO BE FIXED
+        let _currentBugId = 0;
+
+        const bugActionCreators = {
+            addNew(newBugName){
+                const newBug = { 
+                    id : ++_currentBugId,
+                    name : newBugName,
+                    isClosed : false,
+                    createdAt : new Date()
+                };
+                const action = { type : 'BUGS_ADD_NEW', payload : newBug };
+                return action;
+            }
+        }
+        const BugTracker = ({bugs, addNew}) => {
+            const [newBugName, setNewBugName] = React.useState('');
+            const bugItems = bugs.map(bug => (
+                <li key={bug.id}>
+                    <span className="bugname">{bug.name}</span>
+                    <div className="datetime">[ {bug.createdAt.toString()} ]</div>
+                    <input type="button" value="Remove" />
+                </li>
+            ))
             return(
                 <React.Fragment>
                     <section>
@@ -69,7 +100,7 @@
                     <section className="stats">
                         <span className="closed">1</span>
                         <span> / </span>
-                        <span>2</span>
+                        <span>{bugs.length}</span>
                     </section>
                     <section className="sort">
                         <label htmlFor="">Order By :</label>
@@ -82,21 +113,12 @@
                     </section>
                     <section className="edit">
                         <label htmlFor="">Bug Name :</label>
-                        <input type="text" name="" id="" />
-                        <input type="button" value="Add New" />
+                        <input type="text" onChange={ evt => setNewBugName(evt.target.value)} />
+                        <input type="button" value="Add New" onClick={ () => addNew(newBugName)} />
                     </section>
                     <section className="list">
                         <ol>
-                            <li>
-                                <span className="bugname">[Bug - 1]</span>
-                                <div className="datetime">[Created At]</div>
-                                <input type="button" value="Remove" />
-                            </li>
-                            <li>
-                                <span className="bugname closed">[Bug - 2]</span>
-                                <div className="datetime">[Created At]</div>
-                                <input type="button" value="Remove" />
-                            </li>
+                            {bugItems}
                         </ol>
                         <input type="button" value="Remove Closed" />
                     </section>
@@ -104,9 +126,17 @@
             )
         }
         
-        ReactDOM.render(
-            <BugTracker/>
-        , document.getElementById('root'))
+        const store = Redux.createStore(bugsReducer);
+        const bugActionDispatchers = Redux.bindActionCreators(bugActionCreators, store.dispatch);
+        function renderApp(){
+            const bugs = store.getState();
+            ReactDOM.render(
+                <BugTracker bugs={bugs} {...bugActionDispatchers} />
+            , document.getElementById('root'))
+        }
+
+        renderApp();
+        store.subscribe(renderApp);
 
     </script>
 </head>

@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import bugApi from '../services/bugApi';
 
 function getLocalBugs(){
     const bugs = [
@@ -62,9 +63,20 @@ function load(){
 } */
 
 //using the getRemoteBugs()
+/* 
 function load(){
     return async function(dispatch){
         const bugs = await getRemoteBugs();
+        const action = { type : 'BUGS_INIT', payload : bugs };
+        dispatch(action);
+    }
+} 
+*/
+
+//using the bugApi service
+function load(){
+    return async function(dispatch){
+        const bugs = await bugApi.getAll();
         const action = { type : 'BUGS_INIT', payload : bugs };
         dispatch(action);
     }

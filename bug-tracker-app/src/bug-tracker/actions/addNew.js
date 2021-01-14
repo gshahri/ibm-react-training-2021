@@ -1,3 +1,4 @@
+/* 
 let _currentBugId = 0;
 export default function addNew(newBugName){
     const newBug = { 
@@ -8,4 +9,21 @@ export default function addNew(newBugName){
     };
     const action = { type : 'BUGS_ADD_NEW', payload : newBug };
     return action;
+}; 
+*/
+
+import bugApi from '../services/bugApi'
+
+export default function addNew(newBugName){
+    return async function(dispatch){
+        const newBugData = { 
+            id : 0,
+            name : newBugName,
+            isClosed : false,
+            createdAt : new Date()
+        };
+        const newBug = await bugApi.save(newBugData);
+        const action = { type : 'BUGS_ADD_NEW', payload : newBug };
+        dispatch(action);
+    }
 };

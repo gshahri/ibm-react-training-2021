@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        #root > h1{
+            color : blue;
+        }
+
+    </style>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script src="stateManager.js"></script>
+    <script type="text/babel">
+
+        function productsReducer(currentState = [], action){
+            if (action.type === 'ADD_PRODUCT'){
+                const newState = [ ...currentState, action.payload ];
+                return newState;
+            } 
+            if (action.type === 'REMOVE_PRODUCT'){
+                const newState = currentState.filter(product => product !== action.payload);
+                return newState;
+            }
+            return currentState;
+        }
+        
+        const productActionCreators  = {
+            addNew(productName){
+                return { type : 'ADD_PRODUCT', payload : productName }
+            },
+            remove(productName){
+                return { type : 'REMOVE_PRODUCT', payload : productName}
+            }
+        }
+
+        const store = StateManager.createStore(productsReducer);
+
+        const productActionDispatchers = StateManager.bindActionCreators(productActionCreators, store.dispatch);
+
+        const Products = ({list, addNew, remove}) => {
+            const [newProductName, setNewProductName] = React.useState(''); 
+            const productItems = list.map((productName, index) => (
+                <li key={index}>
+                    <span> {productName} </span>
+                    <input type="button" value="Remove" onClick={ _ => remove(productName)} />
+                </li>
+            ));
+            return (
+                <React.Fragment>
+                    <h1>Products</h1>
+                    <hr />
+                    <label>Product Name :</label>
+                    <input type="text" onChange={evt => setNewProductName(evt.target.value)} />
+                    <input type="button" value="Add New" onClick={ _ => addNew(newProductName)} />
+                    <ol>
+                        {productItems}
+                    </ol>
+                </React.Fragment>
+            )
+        }
+        
+        function renderApp(){
+            const list = store.getState();
+            ReactDOM.render(
+                <Products list={list} {...productActionDispatchers}/>
+            , document.getElementById('root'))
+        }
+        renderApp();
+        store.subscribe(renderApp);
+    </script>
+</head>
+<body>
+    <div id="root">
+    </div>
+</body>
+</html>

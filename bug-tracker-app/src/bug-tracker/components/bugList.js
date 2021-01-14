@@ -1,7 +1,7 @@
 import BugItem from './bugItem';
 const BugList = ({bugs, removeClosed, toggle, remove }) => {
     const bugItems = bugs.map(bug => (
-        <BugItem {...{bug, remove, toggle}} />
+        <BugItem key={bug.id} {...{bug, remove, toggle}} />
     ))
     return (
         <section className="list">

@@ -6,8 +6,9 @@
 
 import bugApi from '../services/bugApi';
 
-export default function removeClosed(bugs){
-    return function(dispatch){
+export default function removeClosed(){
+    return function(dispatch, getState){
+        const bugs = getState();
         const bugsToRemove = bugs.filter(bug => bug.isClosed);
         bugsToRemove
             .forEach(async bugToRemove => {

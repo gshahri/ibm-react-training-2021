@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import './index.css';
 
 //presentation (OR) dumb component
@@ -9,12 +9,16 @@ import BugList from './components/bugList';
 
 //container (OR) smart component
 const BugTracker = ({bugs, addNew, remove, toggle, removeClosed, load}) => {
+    useEffect(() => {
+        load();
+    }, [load]);
+    
     return(
         <Fragment>
             <section>
                 <h3>Bugs</h3>
             </section>
-            <input type="button" value="LOAD BUGS" onClick={load} />
+            {/* <input type="button" value="LOAD BUGS" onClick={load} /> */}
             <BugStats bugs={bugs} />
             <BugSort/>
             <BugEdit addNew={addNew} />

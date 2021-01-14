@@ -1,3 +1,4 @@
+import * as axios from 'axios';
 
 function getLocalBugs(){
     const bugs = [
@@ -17,10 +18,56 @@ function getLocalBugs(){
     return bugs;
 }
 
+/* function getRemoteBugs(){
+   return axios.get('http://localhost:3030/bugs')
+        .then(response => response.data)
+} */
+
+//the above function implementation using "async await"
+async function getRemoteBugs(){
+   const response = await axios.get('http://localhost:3030/bugs');
+   return response.data;
+}
+
+//sync action
+/* 
 function load(){
     const bugs = getLocalBugs();
     const action = { type : 'BUGS_INIT', payload : bugs };
-    return action;
+    return action;    
+} 
+*/
+
+
+//async action
+/* function load(){
+    return function(dispatch){
+        axios.get('http://localhost:3030/bugs')
+            .then(response => response.data)
+            .then(bugs => {
+                const action = { type : 'BUGS_INIT', payload : bugs };
+                dispatch(action);
+            });   
+    }
+} */
+
+//using async await
+/* function load(){
+    return async function(dispatch){
+        const response = await axios.get('http://localhost:3030/bugs');
+        const bugs = response.data
+        const action = { type : 'BUGS_INIT', payload : bugs };
+        dispatch(action);
+    }
+} */
+
+//using the getRemoteBugs()
+function load(){
+    return async function(dispatch){
+        const bugs = await getRemoteBugs();
+        const action = { type : 'BUGS_INIT', payload : bugs };
+        dispatch(action);
+    }
 }
 
 export default load;

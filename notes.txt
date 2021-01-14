@@ -253,3 +253,7 @@ Flux
 
 Redux
     Library - https://unpkg.com/redux@4.0.5/dist/redux.js
+
+To install redux
+    npm install redux
+    yarn add redux

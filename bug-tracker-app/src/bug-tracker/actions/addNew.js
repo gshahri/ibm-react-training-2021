@@ -20,7 +20,8 @@ export default function addNew(newBugName){
             id : 0,
             name : newBugName,
             isClosed : false,
-            createdAt : new Date()
+            createdAt : new Date(),
+            projectId : 0 //id of the project selected in the dropdown list box
         };
         const newBug = await bugApi.save(newBugData);
         const action = { type : 'BUGS_ADD_NEW', payload : newBug };

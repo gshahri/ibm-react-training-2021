@@ -1,6 +1,8 @@
 import { Fragment, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import './index.css';
 import projectActionCreators from './actions';
 
 const Projects = ({list, load}) => {
@@ -11,6 +13,7 @@ const Projects = ({list, load}) => {
         <Fragment>
             <h3>Projects</h3>
             <ol>
+                <li className="selected">Test Project</li>
                 {list.map(project =>(
                     <li key={project.id}>{project.name}</li>
                 ))}

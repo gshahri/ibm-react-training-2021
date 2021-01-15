@@ -273,3 +273,10 @@ react-redux
     adapters between the react & redux
         connect
         Provider
+
+Assignment
+    1. Associate the projectId (from the dropdown ) with each project
+        
+    2. Display the bugs beloging to the selecte project (in the projects component)
+        select & unselect the project by clicking the project name (in the projects component)
+        if no project is selected in the projects component, display all the bugs

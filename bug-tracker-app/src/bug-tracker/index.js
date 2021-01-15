@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import useQuery from '../utils/useQuery';
+
 import './index.css';
 import bugActionCreators from './actions';
 
@@ -11,10 +13,14 @@ import BugEdit from './components/bugEdit';
 import BugList from './components/bugList';
 
 //container (OR) smart component
-const BugTracker = ({bugs, projects, addNew, remove, toggle, removeClosed, load}) => {
+const BugTracker = ({bugs, projects, addNew, remove, toggle, removeClosed, load }) => {
+    
+    const query = useQuery();
+    console.log('xyz -> ', query.get('xyz') );
     useEffect(() => {
         load();
     }, [load]);
+    
     return(
         <Fragment>
             <section>

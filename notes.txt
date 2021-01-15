@@ -280,3 +280,14 @@ Assignment
     2. Display the bugs beloging to the selecte project (in the projects component)
         select & unselect the project by clicking the project name (in the projects component)
         if no project is selected in the projects component, display all the bugs
+
+
+Recordings:
+    http://bit.ly/react-videos
+    
+In the application there ONLY 2 places where the whole store state is accessible
+    1. mapStateToProps
+        used to access the storestate for PRESENTATION
+
+    2. actions (actions returning a function (async actions))
+        used to access the storestate for MANIPULATION

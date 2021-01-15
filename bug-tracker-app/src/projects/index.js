@@ -1,21 +1,25 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import './index.css';
 import projectActionCreators from './actions';
 
-const Projects = ({list, load}) => {
+const Projects = ({list, load, selected, setSelectedProject}) => {
     useEffect(() =>{
         load();
     }, [load]);
+    console.log(list);
     return(
         <Fragment>
             <h3>Projects</h3>
             <ol>
-                <li className="selected">Test Project</li>
                 {list.map(project =>(
-                    <li key={project.id}>{project.name}</li>
+                    <li 
+                        key={project.id} 
+                        className={project === selected ? 'selected' : ''}
+                        onClick={ () => setSelectedProject(project === selected ? '' : project)}
+                    >{project.name}</li>
                 ))}
             </ol>
         </Fragment>
@@ -23,9 +27,9 @@ const Projects = ({list, load}) => {
     )
 }
 
-function mapStateToProps(storeState){
-    const { projects } = storeState;
-    return { list : projects };
+function mapStateToProps({projects}){
+    const { list, selected } = projects;
+    return ({list, selected});
 }
 
 function mapDispatchToProps(dispatch){

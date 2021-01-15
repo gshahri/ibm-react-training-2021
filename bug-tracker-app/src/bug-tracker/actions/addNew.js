@@ -14,14 +14,14 @@ export default function addNew(newBugName){
 
 import bugApi from '../services/bugApi'
 
-export default function addNew(newBugName){
+export default function addNew(newBugName, selectedProject){
     return async function(dispatch){
         const newBugData = { 
             id : 0,
             name : newBugName,
             isClosed : false,
             createdAt : new Date(),
-            projectId : 0 //id of the project selected in the dropdown list box
+            projectId : selectedProject
         };
         const newBug = await bugApi.save(newBugData);
         const action = { type : 'BUGS_ADD_NEW', payload : newBug };

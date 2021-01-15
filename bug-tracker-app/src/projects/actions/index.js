@@ -8,6 +8,10 @@ const projectActionCreators = {
     load(){
         const action = { type : 'PROJECTS_INIT', payload  : projectsData };
         return action;
+    },
+    setSelectedProject(project){
+        const action = { type : 'PROJECTS_SET_SELECTED', payload : project };
+        return action;
     }
 }
 

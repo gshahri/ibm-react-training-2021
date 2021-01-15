@@ -50,7 +50,6 @@ const BugTracker = ({bugs, projects, addNew, remove, toggle, removeClosed, load}
 //export default connect(mapStateToProps, mapDispatchToProps)(BugTracker);
 
 export default connect(
-    
     ({bugs, projects}) => {
         if (!projects.selected){
             return ({bugs, projects : projects.list})

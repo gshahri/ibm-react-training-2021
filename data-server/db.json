@@ -27,20 +27,6 @@
       "isClosed": false,
       "createdAt": "2021-01-15T18:21:37.926Z",
       "projectId": "2"
-    },
-    {
-      "id": 5,
-      "name": "Bug - 5",
-      "isClosed": false,
-      "createdAt": "2021-01-15T18:21:45.571Z",
-      "projectId": "3"
-    },
-    {
-      "id": 6,
-      "name": "Bug - 6",
-      "isClosed": false,
-      "createdAt": "2021-01-15T18:21:51.502Z",
-      "projectId": "3"
     }
   ],
   "projects": [

@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
+import rootReducer from '../reducers'
 
-import bugsReducer from '../reducers/bugsReducer';
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
+export default store;
 
 /* const loggerMiddleware = store => next => action => {
     console.group(action.type);
@@ -26,6 +28,3 @@ const asyncMiddleware = ({dispatch, getState}) => next => action => {
 
 const store = createStore(bugsReducer, applyMiddleware(loggerMiddleware, asyncMiddleware));
 */
-
-const store = createStore(bugsReducer, applyMiddleware(logger, thunk));
-export default store;

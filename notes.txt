@@ -291,3 +291,19 @@ In the application there ONLY 2 places where the whole store state is accessible
 
     2. actions (actions returning a function (async actions))
         used to access the storestate for MANIPULATION
+
+Testing
+    JS testing framework - JEST (https://jestjs.io/)
+
+To create a build
+    yarn build
+        (OR)
+    npm run build
+
+
+To run the demos
+    import the code (http://github.com/tkmagesh/ibm-react-jan-2021)
+    from the application folder run the following command to install the npm dependencies
+        npm install
+            OR
+        yarn

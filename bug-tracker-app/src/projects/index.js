@@ -9,7 +9,7 @@ const Projects = ({list, load, selected, setSelectedProject}) => {
     useEffect(() =>{
         load();
     }, [load]);
-    console.log(list);
+    console.log(selected);
     return(
         <Fragment>
             <h3>Projects</h3>
@@ -17,7 +17,7 @@ const Projects = ({list, load, selected, setSelectedProject}) => {
                 {list.map(project =>(
                     <li 
                         key={project.id} 
-                        className={project === selected ? 'selected' : ''}
+                        className={project.id === selected.id ? 'selected' : ''}
                         onClick={ () => setSelectedProject(project === selected ? '' : project)}
                     >{project.name}</li>
                 ))}

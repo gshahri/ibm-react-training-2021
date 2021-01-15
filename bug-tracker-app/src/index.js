@@ -7,10 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 import BugTracker from './bug-tracker';
 import Projects from './projects';
-    
+window['store'] = store;
 ReactDOM.render(
     <Provider store={store}>
         <div>
+            <input type="button" value="Hibernate" onClick={() => window.localStorage.setItem('bug-tracker-state', JSON.stringify(store.getState()))} />
             <h1>Bug Tracker</h1>
             <hr/>
             <Projects />

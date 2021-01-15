@@ -2,8 +2,10 @@ import { createStore } from 'redux';
 import rootReducer from '../reducers'
 import appMiddlewares from './middlewares';
 
-const preloadedState = JSON.parse(window.localStorage.getItem('bug-tracker-state'))
+let preloadedState;
+const rawState = window.localStorage.getItem('bug-tracker-state');
+if (rawState){
+    preloadedState = JSON.parse(rawState)
+}
 const store = createStore(rootReducer, preloadedState, appMiddlewares);
-
-console.log('initial  storestate -> ', store.getState());
 export default store;

@@ -268,3 +268,8 @@ For server communication use axios (https://www.npmjs.com/package/axios)
         yarn add axios
             (OR)
         npm install axios
+
+react-redux
+    adapters between the react & redux
+        connect
+        Provider

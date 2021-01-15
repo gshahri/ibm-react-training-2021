@@ -15,8 +15,14 @@
     {
       "id": 5,
       "name": "Bugs are not toggled",
-      "isClosed": false,
+      "isClosed": true,
       "createdAt": "2021-01-15T14:25:33.663Z"
+    },
+    {
+      "id": 6,
+      "name": "Application not responding to user actions",
+      "isClosed": false,
+      "createdAt": "2021-01-15T15:10:53.341Z"
     }
   ],
   "projects": [

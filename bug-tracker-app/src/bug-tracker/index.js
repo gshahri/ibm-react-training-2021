@@ -1,5 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './index.css';
+import bugActionCreators from './actions';
 
 //presentation (OR) dumb component
 import BugStats from './components/bugStats';
@@ -18,7 +21,6 @@ const BugTracker = ({bugs, addNew, remove, toggle, removeClosed, load}) => {
             <section>
                 <h3>Bugs</h3>
             </section>
-            {/* <input type="button" value="LOAD BUGS" onClick={load} /> */}
             <BugStats bugs={bugs} />
             <BugSort/>
             <BugEdit addNew={addNew} />
@@ -27,4 +29,14 @@ const BugTracker = ({bugs, addNew, remove, toggle, removeClosed, load}) => {
     )
 }
 
-export default BugTracker;
+function mapStateToProps(storeState){
+    const { bugs } = storeState;
+    return { bugs : bugs };
+}
+
+function mapDispatchToProps(dispatch){
+    const bugActionDispatchers = bindActionCreators(bugActionCreators, dispatch);
+    return bugActionDispatchers;
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BugTracker);
